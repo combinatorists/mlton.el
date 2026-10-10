@@ -53,6 +53,7 @@ source file."
         (error))
         (setq mlton-errors (reverse errors)))))
 
+;;;###autoload
 (defun mlton-next-error ()
   (interactive)
   (if (or (not (get-buffer mlton-output-buffer))
@@ -65,6 +66,7 @@ source file."
       (switch-to-buffer (marker-buffer marker))
       (goto-char marker))))
 
+;;;###autoload
 (defun mlton-set-main ()
   (interactive)
   (setq mlton-main-file (buffer-file-name)))
@@ -89,6 +91,7 @@ source file."
                (if (buffer-modified-p) (save-buffer)))))
        (setq l (cdr l))))))
 
+;;;###autoload
 (defun mlton-compile ()
   (interactive)
   (let ((buffer (current-buffer)))
@@ -106,6 +109,7 @@ source file."
     (switch-to-buffer buffer)
     (mlton-next-error)))
 
+;;;###autoload
 (defun mlton-parse-errors-this-buffer ()
   (interactive)
   (if (get-buffer mlton-output-buffer)
@@ -113,5 +117,5 @@ source file."
   (rename-buffer mlton-output-buffer)
   (mlton-parse-errors (file-name-directory mlton-main-file)
                       (current-buffer)))
-  
+
 (provide 'sml-mlton)
